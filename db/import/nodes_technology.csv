@@ -1,0 +1,4 @@
+:technologyId:ID(Technology),name
+tech1,Keycloak
+tech2,PostgreSQL
+

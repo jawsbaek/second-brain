@@ -1,0 +1,3 @@
+:evidenceId:ID(Evidence),url,title,source,published_at:date,text
+ev1,https://example.com/blog/keycloak-sso,"Keycloak SSO 사례","Blog",2025-07-01,"Keycloak로 OIDC 기반 SSO를 구현..."
+

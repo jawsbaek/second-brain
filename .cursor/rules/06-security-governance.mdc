@@ -1,0 +1,19 @@
+---
+globs: *.py,*.ts,*.tsx
+description: "ABAC, visibility, auditing, and versioning expectations."
+---
+
+### Access control
+
+- Enforce row/edge-level security; nodes/edges include `visibility` = public|team|confidential.
+- Policy example: `(:Evidence {visibility:'confidential'})` accessible only to same `Team` via `OWNED_BY` links.
+
+### AuthN/AuthZ
+
+- Use OIDC (Keycloak). Apply ABAC middleware for field/node-level checks.
+
+### Auditing and versioning
+
+- Persist who/when/why for edits; track evidence provenance from ingestion to decision changes.
+- Version evidence via content hash and `:Revision` nodes as history.
+

@@ -1,0 +1,25 @@
+---
+globs: *.cypher,*.py,*.ts,*.tsx
+description: "Query templates and hybrid graph+vector RAG patterns."
+---
+
+### Decision candidate search (template)
+
+```cypher
+MATCH (req:Requirement {key:$reqKey})
+OPTIONAL MATCH (con:Constraint)<-[:VIOLATES]-(t:Technology)
+WHERE con IS NULL OR con.severity < $threshold
+MATCH (t:Technology)-[:ADDRESSES]->(req)
+WITH t, req
+OPTIONAL MATCH (e:Evidence)-[r:SUPPORTS]->(t)
+WITH t, sum(r.weight * exp(-0.002 * duration.inDays(r.timestamp, date()).days)) AS support_score
+RETURN t.name AS tech, support_score
+ORDER BY support_score DESC LIMIT 10;
+```
+
+### Hybrid search steps
+
+- Use vector search for semantic retrieval → take top-N chunks → traverse to Evidence/Technology.
+- Return candidate nodes with evidence paths (shortest/weighted) for explainability.
+- Inject sources (URLs, dates, excerpts, trust scores) into LLM prompts; never guess if no source.
+

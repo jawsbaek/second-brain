@@ -1,0 +1,14 @@
+---
+alwaysApply: true
+description: "ETL/ELT pipeline: connectors, preprocessing, NER/RE with human review, embeddings, load, upkeep."
+---
+
+### Stages
+
+1) Connectors: Confluence, Google Drive/Docs, GitHub (code/PR/issues), Jira, Slack/Notion, RSS/News, internal wiki
+2) Preprocessing: chunking (paragraph/header), ADR/code schema parsing, meta extraction (author/date/tags)
+3) NER/RE: extract technologies/patterns/metrics/teams and relations (SUPPORTS, CONTRADICTS, DEPENDS_ON, ALTERNATIVE_OF, ...); route to human review queue for approve/edit/reject
+4) Embeddings: text/code embeddings to vector index; store mapping (chunk_id ↔ Evidence)
+5) Graph load: MERGE create-or-version (semantic hash), attach relations { weight, confidence, ts, source }
+6) Maintenance: re-link, update decay, re-score trust
+

@@ -1,0 +1,14 @@
+---
+alwaysApply: true
+description: "Physical architecture for graph DB, vector index, storage, queues, API, and auth."
+---
+
+### Components
+
+- Graph DB: Neo4j (core graph/inference; use GDS for similarity/ranking)
+- Vector index: Neo4j Vector Index (5.x/Aura) or external (Qdrant/pgvector/Weaviate) with key linkage
+- Object storage: S3/GCS for raw snapshots (URL + content hash)
+- Messaging/Jobs: Kafka or Redis Streams for async crawl/parse/embedding
+- API/Services: FastAPI for ingest/query/admin; workers via Celery/RQ
+- Auth/Governance: OIDC (Keycloak) with field/node-level ABAC and audit trails
+

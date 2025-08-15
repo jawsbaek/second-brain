@@ -1,0 +1,58 @@
+---
+globs: *.py
+description: "Canonical FastAPI models and endpoints for ingest and linking."
+---
+
+### Pydantic models
+
+```python
+class EvidenceIn(BaseModel):
+    title: str
+    url: HttpUrl
+    source: Literal["Confluence","GitHub","News","Jira","Drive","Other"]
+    published_at: datetime
+    visibility: Literal["public","team","confidential"]
+    text: str
+
+class LinkIn(BaseModel):
+    src_id: str
+    dst_id: str
+    rel: Literal["SUPPORTS","CONTRADICTS","DEPENDS_ON","ALTERNATIVE_OF","ADDRESSES","VIOLATES"]
+    weight: float
+    confidence: float
+    timestamp: datetime
+```
+
+### Endpoints (essentials)
+
+```python
+@app.post("/evidences")
+def add_evidence(ev: EvidenceIn):
+    # 1) chunk & embed -> vector upsert
+    # 2) Neo4j MERGE (Evidence) SET props
+    # 3) return node_id
+    ...
+
+@app.post("/links")
+def add_link(link: LinkIn):
+    # MERGE (src)-[r:TYPE]->(dst) SET weight/confidence/timestamp
+    ...
+
+@app.post("/decisions/draft")
+def draft_decision(query: str, constraints: list[str] = []):
+    # vector.search -> graph.expand -> LLM -> ADR draft
+    ...
+```
+
+### Cypher load examples
+
+```cypher
+MERGE (e:Evidence {url:$url})
+SET e.title=$title, e.source=$source, e.published_at=date($published_at),
+    e.visibility=$visibility, e.hash=$hash;
+
+MERGE (t:Technology {name:$tech})
+MERGE (e)-[r:SUPPORTS]->(t)
+SET r.weight=$weight, r.confidence=$conf, r.timestamp=date($ts);
+```
+

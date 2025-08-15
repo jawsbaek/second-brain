@@ -1,0 +1,22 @@
+---
+globs: *.py,*.ts
+description: "LLM agent I/O: prompt template, tools, output formatting, and source-grounding rules."
+---
+
+### Prompt template essentials
+
+- Include: user query + summarized requirements/constraints + graph query results (candidates, tradeoffs) + evidence snippets with links/dates/trust.
+- Rule: never guess without sources; say "unknown" if insufficient evidence.
+
+### Agent tools
+
+- graph.search(cypher, params)
+- vector.search(query, k)
+- evidence.get(chunk_ids)
+- decision.create/update(ADR)
+
+### Output
+
+- Top-N recommendations with adopt/hold/alternative rationale.
+- Always include source links and dates; generate ADR draft for review.
+

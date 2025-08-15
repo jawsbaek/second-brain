@@ -1,0 +1,17 @@
+---
+alwaysApply: false
+description: "Preferred stack: Neo4j (+GDS), vector DB, FastAPI, workers, and UI tooling."
+---
+
+### Core components
+
+- Graph DB: Neo4j (5.x/Aura) with GDS for similarity/ranking; optional Vector Index.
+- Vector index: Qdrant/pgvector/Weaviate or Neo4j Vector Index; store mapping chunk_id ↔ Evidence.
+- Object storage: S3/GCS for raw snapshots.
+- Queue: Kafka/Redis Streams for async crawl/parse/embed.
+- API: FastAPI + Pydantic + uvicorn; workers via Celery/RQ + Redis.
+- Extractors: Trafilatura/readability, Markdown/HTML parsers, tree-sitter for code.
+- NER/RE: spaCy/Presidio + rules + small LLM with human-in-the-loop review.
+- Auth: Keycloak (OIDC) + ABAC middleware.
+- UI: React + Cytoscape.js, shadcn/ui.
+

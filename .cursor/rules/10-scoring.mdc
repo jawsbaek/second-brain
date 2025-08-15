@@ -1,0 +1,17 @@
+---
+alwaysApply: false
+description: "Decision recommendation scoring formula and tunable coefficients."
+---
+
+```text
+score(tech) =
+  α * Σ SUPPORTS.weight*decay
+- β * Σ CONTRADICTS.weight*decay
++ γ * Σ ADDRESSES(Requirement).weight
+- δ * Σ VIOLATES(Constraint).severity
++ ε * org_utilization(OWNED_BY team skill/experience)
++ ζ * inverse(Incident linkage risk)
+```
+
+- Coefficients α..ζ are domain-tunable (service/security/data presets).
+

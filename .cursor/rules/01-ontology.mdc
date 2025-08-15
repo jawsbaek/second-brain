@@ -1,0 +1,48 @@
+---
+alwaysApply: true
+description: "Canonical ontology: node/relationship types, properties, and conventions."
+---
+
+### Node types
+
+- Technology
+- Concept
+- Decision (ADR)
+- Requirement
+- Constraint
+- Evidence (subtypes: Doc, News, Repo, Ticket, MeetingNote, Benchmark)
+- Experiment
+- Metric
+- Risk, Incident
+- Team, Person
+
+### Relationship types (directed →)
+
+- SUPPORTS (Evidence → Decision|Technology) { weight, confidence, timestamp }
+- CONTRADICTS (Evidence → Decision|Technology) { weight, confidence, timestamp }
+- IMPLEMENTS (Technology → Concept|Requirement)
+- ALTERNATIVE_OF (Technology ↔ Technology) { overlap, tradeoff_vector }
+- DEPENDS_ON (Technology → Technology) { criticality }
+- ADDRESSES (Decision|Technology → Requirement)
+- VIOLATES (Technology|Decision → Constraint)
+- OBSERVED_IN (Metric|Experiment → Evidence|Incident)
+- OWNED_BY (Technology|Decision|Evidence → Team|Person)
+
+### Property conventions
+
+- Common: `id` (internal), `created_at`, `updated_at`, `visibility` (public|team|confidential)
+- Evidence: `title`, `url`, `source`, `published_at`, `hash`
+- Decision: `status` (accepted|proposed|superseded), `context`, `options`, `decision`, `consequences`
+- Metric: domain-specific keys (e.g., `p95_latency`, `error_rate`, `slo`)
+
+### Naming conventions
+
+- Labels: PascalCase (e.g., `Technology`, `Decision`).
+- Relationship types: UPPER_SNAKE (e.g., `SUPPORTS`, `DEPENDS_ON`).
+- Properties: lower_snake (e.g., `published_at`, `tradeoff_vector`).
+
+### Uniqueness/identity guidance
+
+- Evidence: MERGE by `url`; persist content `hash` and `published_at` for versioning.
+- Technology/Concept/Requirement: MERGE by human-stable keys (e.g., `name` or `key`).
+

@@ -1,0 +1,22 @@
+---
+alwaysApply: true
+description: "Weight/decay/trust design and effective distance computation."
+---
+
+### Weighting and decay
+
+- weight = source_trust × extraction_confidence × relevance
+- decay(age_days) = exp(-λ × age_days) with domain-tuned λ
+- effective_distance = 1 / (ε + weight × decay × trust)
+
+### Heuristics
+
+- Internal experiments/benchmarks have higher trust.
+- External news start with moderate trust; upgrade upon internal validation.
+- Recent incidents increase effect (lower distance via larger decay factor).
+
+### Maintenance jobs
+
+- Periodically recompute decay and refresh composite weights.
+- Re-link related nodes as new evidence arrives; re-evaluate confidence.
+

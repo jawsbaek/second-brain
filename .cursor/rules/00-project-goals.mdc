@@ -1,0 +1,24 @@
+---
+alwaysApply: true
+description: "High-level goals and principles for the decision-centric knowledge graph."
+---
+
+### Goals
+
+- Build a decision engine that models knowledge as nodes–relations–distance to enable: (1) fast exploration/summarization, (2) decision support (technology choices/tradeoffs), (3) rigorous, citable RAG context for LLMs.
+
+### Principles
+
+- Every fact must have a source (link + snapshot hash) and time (created/updated/observed).
+- Distances are modeled via relation properties: weight encodes trust/relevance and combines with time decay and trust to compute effective distance.
+- Automated extraction (NER/RE) must feed a human review loop (approve/edit) before graph acceptance.
+- Fine-grained ABAC enforces security at node/edge/field level.
+
+### Distance interpretation
+
+- Effective distance is smaller when evidence is recent, trustworthy, and relevant. Closer items carry more decision weight.
+
+### Current repository anchor(s)
+
+- Docker composition lives at [second-brain/docker/docker-compose.yml](mdc:second-brain/docker/docker-compose.yml)
+
