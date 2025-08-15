@@ -1,0 +1,38 @@
+{
+  "name": "web",
+  "module": "index.ts",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview --port 5173"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.1.12",
+    "@types/bun": "latest",
+    "@types/react": "^19.1.10",
+    "@types/react-dom": "^19.1.7",
+    "@vitejs/plugin-react": "^5.0.0",
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^4.1.12",
+    "typescript": "^5.9.2",
+    "vite": "^7.1.2"
+  },
+  "dependencies": {
+    "@tanstack/react-query": "^5.85.3",
+    "axios": "^1.11.0",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "cytoscape": "^3.33.1",
+    "cytoscape-cose-bilkent": "^4.1.0",
+    "cytoscape-dagre": "^2.5.0",
+    "keycloak-js": "^26.2.0",
+    "lucide-react": "^0.539.0",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
+    "react-router-dom": "^7.8.0",
+    "zustand": "^5.0.7"
+  }
+}
