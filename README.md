@@ -29,6 +29,14 @@ cd ..
 make seed
 ```
 
+- Ingest a GitHub repository as evidence
+
+```bash
+curl -X POST http://localhost:8088/github/repo \\
+  -H "Content-Type: application/json" \\
+  -d '{"url":"https://github.com/org/repo"}'
+```
+
 ### Env
 
 Edit `api/.env` to set provider, model, and keys. Default uses OpenAI `text-embedding-3-small` (1536 dims).

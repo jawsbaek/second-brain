@@ -1,12 +1,13 @@
 from fastapi import FastAPI
 from .graph import ensure_indexes
-from .routes import evidence, link, search
+from .routes import evidence, link, search, github
 
 
 app = FastAPI(title="Second Brain API")
 app.include_router(evidence.router)
 app.include_router(link.router)
 app.include_router(search.router)
+app.include_router(github.router)
 
 
 @app.on_event("startup")
